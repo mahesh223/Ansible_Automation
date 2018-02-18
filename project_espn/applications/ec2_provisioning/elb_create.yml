@@ -1,0 +1,29 @@
+---
+# Note: None of these examples set aws_access_key, aws_secret_key, or region.
+# It is assumed that their matching environment variables are set.
+
+# Basic provisioning example (non-VPC)
+
+- hosts: 127.0.0.1
+  connection: local
+  tasks:
+    - name: Create an elb for instance
+      ec2_elb_lb:
+        name: "test-please-delete"
+        state: present
+        region: "us-east-2"
+        zones:
+          - us-east-2c
+        listeners:
+          - protocol: http
+            load_balancer_port: 80
+            instance_protocol: http
+            instance_port: 8080
+        health_check:
+          ping_protocol: http # options are http, https, ssl, tcp
+          ping_port: 80
+          ping_path: "/index.html" # not required for tcp or ssl
+          response_timeout: 5 # seconds
+          interval: 30 # seconds
+          unhealthy_threshold: 2
+          healthy_threshold: 10

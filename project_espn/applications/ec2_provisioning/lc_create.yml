@@ -1,0 +1,14 @@
+---
+
+- hosts: 127.0.0.1
+  connection: local
+  tasks:
+    - name: create launch config
+      ec2_lc:
+        name: my_new_lc
+        image_id: ami-e1496384
+        key_name: nginx-test
+        region: "us-east-2"
+        security_groups: sg-4376ba28
+        instance_type: t2.micro
+        assign_public_ip: yes
