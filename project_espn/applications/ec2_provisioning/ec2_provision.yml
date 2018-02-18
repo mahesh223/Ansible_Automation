@@ -1,0 +1,27 @@
+---
+- name: Provision EC2 instance
+  hosts: localhost
+  connection: local
+  become: False
+  vars:
+      region: us-east-2
+      ami: ami-e1496384
+      set_dns:  False
+      instance: t2.micro
+  connection: local
+  gather_facts: true
+  tasks:
+    - name: Launch instance
+      ec2:
+#       aws_access_key: "AKIAJTK6OTS2W3UZVF3A"
+#       aws_secret_key: "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"
+        keypair: nginx-test
+        instance_type: "{{ instance }}"
+        image: "{{ ami }}"
+        region: "{{ region }}"
+        vpc_subnet_id: subnet-4d69d300
+        #security_groups: Nginx-test-sg
+        count: 1
+        assign_public_ip: yes
+        wait: yes
+      register: ec2

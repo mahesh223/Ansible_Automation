@@ -1,0 +1,12 @@
+---
+# This main.yml is run first to create the below mentioned things
+
+- include: ec2_provision.yml
+
+- include: lc_create.yml
+
+- include: elb_create.yml
+
+- include: asg_create.yml
+
+#- include: roles/tomcat/tasks/main.yml

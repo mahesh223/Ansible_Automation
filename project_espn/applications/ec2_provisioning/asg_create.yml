@@ -1,0 +1,20 @@
+---
+# Basic configuration
+
+- hosts: 127.0.0.1
+  connection: local
+  tasks:
+    - name: Create Autoscaling Groups
+      ec2_asg:
+        name: special
+        region: "us-east-2"
+        load_balancers: [ 'test-please-delete' ]
+        availability_zones: [ 'us-east-2c' ]
+        launch_config_name: 'my_new_lc'
+        min_size: 1
+        max_size: 1
+        desired_capacity: 1
+        vpc_zone_identifier: [ 'subnet-4d69d300' ]
+        tags:
+          - environment: production
+            propagate_at_launch: no
