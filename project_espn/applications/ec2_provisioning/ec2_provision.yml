@@ -13,8 +13,8 @@
   tasks:
     - name: Launch instance
       ec2:
-#       aws_access_key: "AKIAJTK6OTS2W3UZVF3A"
-#       aws_secret_key: "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"
+#       aws_access_key: " "
+#       aws_secret_key: " "
         keypair: nginx-test
         instance_type: "{{ instance }}"
         image: "{{ ami }}"
